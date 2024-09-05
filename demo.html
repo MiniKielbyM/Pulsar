@@ -7,12 +7,10 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-app-compat.js"></script>
     <!-- Firebase Auth (specifically for authentication) -->
     <script src="https://www.gstatic.com/firebasejs/9.6.4/firebase-auth-compat.js"></script>
+    <script src="Auth.js"></script>
 </head>
 
 <body>
-    <h1>Sign in with Google</h1>
-    <button id="googleSignIn">Sign in with Google</button>
-
     <script>
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -24,28 +22,17 @@
             appId: "1:872754841437:web:4c4861d25a93422067cab4"
         };
 
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const provider = new firebase.auth.GoogleAuthProvider();
-
-        document.getElementById('googleSignIn').addEventListener('click', () => {
-            auth.signInWithPopup(provider)
-                .then((result) => {
-                    // This gives you a Google Access Token. You can use it to access the Google API.
-
-                    // The signed-in user info.
-                    const user = result.user;
-                    console.log('User signed in: ', user);
-                    alert('User signed in: ' + user.displayName);
-                }).catch((error) => {
-                    // Handle Errors here.
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    console.log('Error: ', errorCode, errorMessage);
-                });
-        });
+        // Instantiate the FirebaseAuth class
+        const firebaseAuth = new PulsarAuth(firebaseConfig);
     </script>
+    <button onclick="firebaseAuth.googleSignIn()">Sign in with Google</button>
+    <button onclick="firebaseAuth.facebookSignIn()">Sign in with Facebook</button>
+    <button onclick="firebaseAuth.twitterSignIn()">Sign in with Twitter</button>
+    <button onclick="firebaseAuth.githubSignIn()">Sign in with GitHub</button>
+    <button onclick="firebaseAuth.microsoftSignIn()">Sign in with Microsoft</button>
+    <button onclick="firebaseAuth.yahooSignIn()">Sign in with Yahoo</button>
+    <button onclick="firebaseAuth.appleSignIn()">Sign in with Apple</button>
+    <button onclick="firebaseAuth.signOut()">Sign out</button>
 </body>
 
 </html>
